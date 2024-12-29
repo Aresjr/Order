@@ -1,8 +1,15 @@
 package br.com.amcom.order.exception;
 
+import lombok.Getter;
+
+import java.util.List;
+
+@Getter
 public class InvalidOrderException extends IllegalArgumentException {
 
-    public InvalidOrderException(String message) {
-        super(message);
+    List<String> errors;
+
+    public InvalidOrderException(List<String> errors) {
+        this.errors = errors;
     }
 }

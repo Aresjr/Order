@@ -3,8 +3,11 @@ package br.com.amcom.order.mapper;
 import br.com.amcom.order.dto.request.OrderRequest;
 import br.com.amcom.order.dto.response.OrderResponse;
 import br.com.amcom.order.model.Order;
+import br.com.amcom.order.model.OrderItem;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class OrderMapper {
@@ -21,5 +24,10 @@ public class OrderMapper {
 
     public OrderResponse toResponse(Order order) {
         return objectMapper.convertValue(order, OrderResponse.class);
+    }
+
+    public List<OrderItem> toItems(OrderRequest orderRequest) {
+        return orderRequest.getItems().stream().map(
+                item -> objectMapper.convertValue(item, OrderItem.class)).toList();
     }
 }
