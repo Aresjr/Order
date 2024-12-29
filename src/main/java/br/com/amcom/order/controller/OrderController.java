@@ -36,7 +36,7 @@ public class OrderController {
         try {
             response = orderService.createOrder(orderRequest);
         } catch (InvalidOrderException e) {
-            log.warn("Erro ao criar pedido: {}", e.getMessage());
+            log.warn("Erro ao criar pedido: {}", e.getErrors());
             return new ResponseEntity<>(new ErrorResponse(HttpStatus.UNPROCESSABLE_ENTITY, e.getErrors()),
                     HttpStatus.UNPROCESSABLE_ENTITY);
         }
