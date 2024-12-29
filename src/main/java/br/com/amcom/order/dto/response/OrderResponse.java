@@ -1,11 +1,11 @@
 package br.com.amcom.order.dto.response;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
+@AllArgsConstructor
+@Builder
 @Getter
 @NoArgsConstructor
 @Setter
