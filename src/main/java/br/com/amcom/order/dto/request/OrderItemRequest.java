@@ -9,7 +9,6 @@ import lombok.Getter;
 public class OrderItemRequest {
 
     @NotEmpty(message = "Produto deve ter uma descrição")
-    @NotNull(message = "Produto deve ter uma descrição")
     private String description;
 
     @Min(value = 1, message = "Produto deve ter a quantidade mínima de 1 no pedido")
