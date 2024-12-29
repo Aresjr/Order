@@ -1,8 +1,10 @@
 package br.com.amcom.order.controller;
 
 import br.com.amcom.order.dto.request.OrderRequest;
+import br.com.amcom.order.dto.response.ErrorResponse;
 import br.com.amcom.order.dto.response.OrderResponse;
-import br.com.amcom.order.model.Order;
+import br.com.amcom.order.dto.response.Response;
+import br.com.amcom.order.exception.InvalidOrderException;
 import br.com.amcom.order.service.OrderService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +23,23 @@ public class OrderController {
     private OrderService orderService;
 
     @GetMapping
-    public ResponseEntity<List<Order>> getOrders() {
-        return ResponseEntity.ok(List.of());
+    public ResponseEntity<List<OrderResponse>> getOrders() {
+        return ResponseEntity.ok(orderService.getOrders());
     }
 
     @PostMapping
-    public ResponseEntity<OrderResponse> postOrder(@RequestBody OrderRequest orderRequest) {
+    public ResponseEntity<Response> postOrder(@RequestBody OrderRequest orderRequest) {
         log.info("Requisição de criação de pedido: {};", orderRequest);
 
-        OrderResponse response = orderService.createOrder(orderRequest);
+        OrderResponse response;
+
+        try {
+            response = orderService.createOrder(orderRequest);
+        } catch (InvalidOrderException e) {
+            log.warn("Erro ao criar pedido: {}", e.getMessage());
+            return new ResponseEntity<>(new ErrorResponse(HttpStatus.BAD_REQUEST, e.getMessage()),
+                    HttpStatus.BAD_REQUEST);
+        }
 
         log.info("Pedido criado: {}", response);
         return new ResponseEntity<>(response, HttpStatus.CREATED);

@@ -9,7 +9,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @Setter
-public class OrderResponse {
+public class OrderResponse extends Response {
 
     private String id;
 
