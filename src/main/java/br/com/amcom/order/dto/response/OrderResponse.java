@@ -1,15 +1,17 @@
 package br.com.amcom.order.dto.response;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
-@AllArgsConstructor
 @Getter
+@NoArgsConstructor
+@Setter
 public class OrderResponse {
 
-    private Long id;
+    private String id;
 
     private List<OrderItemResponse> items;
 

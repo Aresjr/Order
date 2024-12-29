@@ -18,7 +18,7 @@ public class OrderService {
     private OrderMapper modelMapper;
 
     public OrderResponse createOrder(OrderRequest orderRequest) {
-        //TODO - check values
+        //TODO - check values and validate
         Order order = orderRepository.save(modelMapper.toModel(orderRequest));
         return modelMapper.toResponse(order);
     }

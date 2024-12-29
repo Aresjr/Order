@@ -2,13 +2,10 @@ version: "3.7"
 
 services:
 
-  db:
-    image: mysql:5.7
-    hostname: mysql
-    container_name: mysql
-    restart: always
+  mongodb:
+    image: mongo:latest
     ports:
-      - "3306:3306"
+      - "27017:27017"
     environment:
-      MYSQL_DATABASE: order
-      MYSQL_ROOT_PASSWORD: password!123
+      - MONGO_INITDB_ROOT_USERNAME=username
+      - MONGO_INITDB_ROOT_PASSWORD=password
